@@ -5,6 +5,8 @@ import Layout from "../layout";
 import PostListing from "../components/PostListing/PostListing";
 import SEO from "../components/SEO/SEO";
 import config from "../../data/SiteConfig";
+import Img from 'gatsby-image';
+
 
 class Index extends React.Component {
   render() {
@@ -13,6 +15,8 @@ class Index extends React.Component {
       <Layout>
         <div className="index-container">
           <Helmet title={config.siteTitle} />
+          <img src="logos/logo-1024.png"></img>
+          <Img fixed={this.props.data.file.childImageSharp.fixed}></Img>
           <SEO />
           <PostListing postEdges={postEdges} />
         </div>
@@ -44,6 +48,13 @@ export const pageQuery = graphql`
             cover
             date
           }
+        }
+      }
+    }
+    file(relativePath: { eq: "logos/logo-1024.png" }) {
+      childImageSharp {
+        fixed(width: 125, height: 125) {
+          ...GatsbyImageSharpFixed
         }
       }
     }

@@ -22,6 +22,7 @@ export default class PostTemplate extends React.Component {
     if (!post.category_id) {
       post.category_id = config.postDefaultCategoryID;
     }
+    console.dir(postNode);
     return (
       <Layout>
         <div>
@@ -31,6 +32,10 @@ export default class PostTemplate extends React.Component {
           <SEO postPath={slug} postNode={postNode} postSEO />
           <div>
             <h1>{post.title}</h1>
+            <div>
+             
+              wordCount :  {postNode.wordCount.words}
+            </div>
             <div dangerouslySetInnerHTML={{ __html: postNode.html }} />
             <div className="post-meta">
               <PostTags tags={post.tags} />
@@ -39,6 +44,7 @@ export default class PostTemplate extends React.Component {
             <UserInfo config={config} />
             <Disqus postNode={postNode} />
           </div>
+          
         </div>
       </Layout>
     );
@@ -66,6 +72,9 @@ export const pageQuery = graphql`
         prevSlug
         slug
         date
+      }
+      wordCount {
+        words
       }
     }
   }
